@@ -21,7 +21,7 @@ class MockData {
   // ---------------------------------------------------------------- Users ---
   static const AppUser admin = AppUser(
     id: 'u_admin',
-    name: 'Suresh Nair',
+    name: 'Venkat',
     role: UserRole.admin,
     email: 'admin@bikerzedge.com',
     phone: '+91 98400 11223',
@@ -45,7 +45,7 @@ class MockData {
 
   static const AppUser mechDivya = AppUser(
     id: 'u_divya',
-    name: 'Divya Menon',
+    name: 'Viky',
     role: UserRole.mechanic,
     email: 'divya@bikerzedge.com',
     phone: '+91 87540 33221',
@@ -96,6 +96,7 @@ class MockData {
             odometer: 24310,
             year: 2021,
             color: 'Stealth Black',
+            engineType: 'Oil Cooled',
           ),
           serviceRequest:
               'Engine oil leak near the head; unusual tapping noise at idle.',
@@ -193,6 +194,7 @@ class MockData {
             odometer: 18760,
             year: 2022,
             color: 'Pearl White',
+            engineType: 'CVT',
           ),
           serviceRequest: 'General service + front brake feels spongy.',
           status: JobStatus.waitingForParts,
@@ -252,6 +254,7 @@ class MockData {
             odometer: 31240,
             year: 2020,
             color: 'Racing Red',
+            engineType: 'Liquid Cooled',
           ),
           serviceRequest: 'Chain noise and gear shifting hard.',
           status: JobStatus.received,
@@ -435,7 +438,7 @@ class MockData {
         AppNotification(
           id: 'n3',
           toUserId: admin.id,
-          message: 'MT-1039 moved to Ready for Delivery by Divya Menon.',
+          message: 'MT-1039 moved to Ready for Delivery by Viky.',
           jobId: 'j4',
           createdAt: _ago(days: 1),
         ),

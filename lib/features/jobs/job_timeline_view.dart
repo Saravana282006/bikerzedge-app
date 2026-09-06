@@ -27,11 +27,19 @@ class JobTimelineView extends StatelessWidget {
       itemBuilder: (context, i) {
         final e = events[i];
         final isLast = i == events.length - 1;
-        return IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        return Padding(
+          padding: EdgeInsets.only(bottom: isLast ? 0 : 4),
+          child: Stack(
             children: [
-              Column(
+              if (!isLast)
+                const Positioned(
+                  left: 16,
+                  top: 34,
+                  bottom: 0,
+                  child: ColoredBox(color: AppColors.slate100, child: SizedBox(width: 2)),
+                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: 34,
@@ -43,66 +51,60 @@ class JobTimelineView extends StatelessWidget {
                     ),
                     child: Icon(_icon(e), size: 17, color: _color(e)),
                   ),
-                  if (!isLast)
-                    Expanded(
-                      child: Container(
-                        width: 2,
-                        color: AppColors.slate100,
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: isLast ? 0 : 18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _title(e),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                          color: AppColors.ink,
-                        ),
-                      ),
-                      if (e.note != null && e.note!.isNotEmpty) ...[
-                        const SizedBox(height: 2),
-                        Text(
-                          e.note!,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: AppColors.slate700,
-                            height: 1.4,
-                          ),
-                        ),
-                      ],
-                      const SizedBox(height: 4),
-                      Row(
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: isLast ? 0 : 18),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.person_outline,
-                              size: 13, color: AppColors.slate500),
-                          const SizedBox(width: 4),
                           Text(
-                            e.byUser,
+                            _title(e),
                             style: const TextStyle(
-                                fontSize: 12, color: AppColors.slate500),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              color: AppColors.ink,
+                            ),
                           ),
-                          const SizedBox(width: 10),
-                          const Icon(Icons.schedule,
-                              size: 12, color: AppColors.slate500),
-                          const SizedBox(width: 4),
-                          Text(
-                            Formatters.dateTime(e.at),
-                            style: const TextStyle(
-                                fontSize: 12, color: AppColors.slate500),
+                          if (e.note != null && e.note!.isNotEmpty) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              e.note!,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: AppColors.slate700,
+                                height: 1.4,
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              const Icon(Icons.person_outline,
+                                  size: 13, color: AppColors.slate500),
+                              const SizedBox(width: 4),
+                              Text(
+                                e.byUser,
+                                style: const TextStyle(
+                                    fontSize: 12, color: AppColors.slate500),
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(Icons.schedule,
+                                  size: 12, color: AppColors.slate500),
+                              const SizedBox(width: 4),
+                              Text(
+                                Formatters.dateTime(e.at),
+                                style: const TextStyle(
+                                    fontSize: 12, color: AppColors.slate500),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),

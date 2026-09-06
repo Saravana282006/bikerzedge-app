@@ -197,6 +197,12 @@ class _OverviewTab extends StatelessWidget {
                   value: job.motorcycle.color!,
                   icon: Icons.palette_outlined,
                 ),
+              if (job.motorcycle.engineType != null)
+                InfoRow(
+                  label: 'Engine type',
+                  value: job.motorcycle.engineType!,
+                  icon: Icons.settings_suggest_outlined,
+                ),
             ],
           ),
         ),

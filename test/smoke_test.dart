@@ -84,7 +84,13 @@ void main() {
     expect(find.text('New service job'), findsOneWidget);
 
     Future<void> fill(String label, String value) async {
-      await tester.enterText(find.widgetWithText(TextFormField, label), value);
+      final field = find.widgetWithText(TextFormField, label);
+      await tester.scrollUntilVisible(
+        field,
+        120,
+        scrollable: find.byType(Scrollable).last,
+      );
+      await tester.enterText(field, value);
     }
 
     await fill('Owner name', 'Test Rider');
@@ -95,12 +101,15 @@ void main() {
     await fill('Odometer (km)', '12000');
     await fill('What needs attention?', 'Routine service');
 
+    final submit = find.widgetWithText(FilledButton, 'Create job (Received)');
     await tester.scrollUntilVisible(
-      find.text('Create job (Received)'),
+      submit,
       200,
       scrollable: find.byType(Scrollable).last,
     );
-    await tester.tap(find.widgetWithText(FilledButton, 'Create job (Received)'));
+    await tester.ensureVisible(submit);
+    await tester.pumpAndSettle();
+    await tester.tap(submit);
     await tester.pumpAndSettle();
 
     // Back on the list with a confirmation.

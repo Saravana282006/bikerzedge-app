@@ -14,5 +14,5 @@ pubspec.lock
 # OS
 .DS_Store
 
-# Generated platform folders (recreate with `flutter create .`)
-# Remove these lines if you commit platform folders to version control.
+# Local Flutter SDK (not part of the app)
+.flutter-sdk/

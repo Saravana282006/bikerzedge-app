@@ -29,6 +29,7 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   final _color = TextEditingController();
   final _serviceRequest = TextEditingController();
 
+  String? _engineType;
   bool _priority = false;
   bool _submitting = false;
 
@@ -65,6 +66,7 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
               odometer: int.tryParse(_odometer.text.trim()) ?? 0,
               year: int.tryParse(_year.text.trim()),
               color: _color.text.trim().isEmpty ? null : _color.text.trim(),
+              engineType: _engineType,
             ),
             serviceRequest: _serviceRequest.text.trim(),
             priority: _priority,
@@ -138,6 +140,21 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
               ),
               const SizedBox(height: 12),
               _field(_color, 'Colour (optional)', Icons.palette_outlined),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                initialValue: _engineType,
+                isExpanded: true,
+                decoration: const InputDecoration(
+                  labelText: 'Engine type',
+                  prefixIcon: Icon(Icons.settings_suggest_outlined),
+                ),
+                hint: const Text('Select engine type'),
+                items: [
+                  for (final t in kEngineTypes)
+                    DropdownMenuItem(value: t, child: Text(t)),
+                ],
+                onChanged: (v) => setState(() => _engineType = v),
+              ),
               const SizedBox(height: 22),
               const SectionHeader('Service request'),
               _field(
